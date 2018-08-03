@@ -74,3 +74,19 @@ func (a *API) GetCountLEDs() (int, error) {
 	return strconv.Atoi(response[10:])
 
 }
+
+func (a *API) GetColors() ([]Color, error) {
+	a.lock.Lock()
+	defer a.lock.Unlock()
+
+	if err := a.sendCommand("getcolors"); err != nil {
+		return []Color{}, err
+	}
+
+	response, err := a.readResponse()
+	if err != nil {
+		return []Color{}, err
+	}
+
+	return ParseColors(response)
+}
