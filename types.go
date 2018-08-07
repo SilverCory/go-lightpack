@@ -50,7 +50,7 @@ func ParseStatusAPI(response string) (StatusAPI, error) {
 
 // I really hate spelling it wrong.
 type Color struct {
-	R, G, B int16
+	R, G, B uint8
 }
 
 func ParseColors(response string) ([]Color, error) {
@@ -95,19 +95,19 @@ func ParseColor(color string) (int, Color, error) {
 	if r, err := strconv.ParseInt(RGBVals[0], 10, 16); err != nil {
 		return ledNumber, Color{}, err
 	} else {
-		retColor.R = int16(r)
+		retColor.R = uint8(r)
 	}
 
 	if g, err := strconv.ParseInt(RGBVals[1], 10, 16); err != nil {
 		return ledNumber, Color{}, err
 	} else {
-		retColor.G = int16(g)
+		retColor.G = uint8(g)
 	}
 
 	if b, err := strconv.ParseInt(RGBVals[2], 10, 16); err != nil {
 		return ledNumber, Color{}, err
 	} else {
-		retColor.B = int16(b)
+		retColor.B = uint8(b)
 	}
 
 	return ledNumber, retColor, nil
